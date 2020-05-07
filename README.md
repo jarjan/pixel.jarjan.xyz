@@ -1,13 +1,10 @@
-# JAMStack Photo Website
+# pixel.jarjan.xyz
 
-Demo sites:
-
-- [jamstack-photo-website.netlify.com](https://jamstack-photo-website.netlify.com) - This project deploying to Netlify
-- [scottishstoater.com](https://www.scottishstoater.com)
+> Photos taken by Pixel 3 smartphone. #teampixel
 
 ## What is this?
 
-This is a proof-of-concept workflow that extracts EXIF data embeded in photos to generate a static website using [Eleventy](https://11ty.dev). 
+This is a proof-of-concept workflow that extracts EXIF data embeded in photos to generate a static website using [Eleventy](https://11ty.dev).
 
 There is a few reasons behind exploring this approach:
 
@@ -21,11 +18,11 @@ I'm an advocate for protecting users privacy and this project is all about ownin
 
 ## What's the script doing?
 
-1. Looks for photos in the top level of a specified folder (eg. src/_photos)
-2. Resizes and optimises each photo based on widths the user has supplied and outputs the results into a seperate specified folder (eg. src/photos/w???/*.jpg).
+1. Looks for photos in the top level of a specified folder (eg. src/\_photos)
+2. Resizes and optimises each photo based on widths the user has supplied and outputs the results into a seperate specified folder (eg. src/photos/w???/\*.jpg).
 3. Rename each resized photo to a standard format based on it's date (dd_LL_yyyy_hhmmss)
-4. Extract the EXIF data and IPTC data and creates a file in `src/_exifdata` for Eleventy to pick up as part of a collection, named (dd_LL_yyyy_hhmmss).
-_This last step was originially piped into Eleventy using a data file. That approach still works but you don't get text based version control of the exif data._
+4. Extract the EXIF data and IPTC data and creates a file in `src/_exifdata` for Eleventy to pick up as part of a collection, named (dd*LL_yyyy_hhmmss).
+   \_This last step was originially piped into Eleventy using a data file. That approach still works but you don't get text based version control of the exif data.*
 
 ## Photo requirements
 
@@ -42,7 +39,7 @@ npm install
 2. Drop a few photos that meet the [minimal requirements](#Photo-requirements) in `src/_photos`.
 
 3. Start the development server
-This step runs `node-exif-photos` then `eleventy`.
+   This step runs `node-exif-photos` then `eleventy`.
 
 ```
 npm start
@@ -54,11 +51,8 @@ npm start
 npm run build
 ```
 
-## Known Limitations 
+## Known Limitations
 
 - Only JPG support.
-- Not commiting the resized files will regenerate them on a pipeline, with a lot of photos this will take a while. Commiting the files solves this. 
+- Not commiting the resized files will regenerate them on a pipeline, with a lot of photos this will take a while. Commiting the files solves this.
 - Adding lots of files at once will take a long time, try adding a max of 20 at a time.
-
-
-

@@ -1,14 +1,14 @@
-const formatDate = require('./FormatDate');
-const fs = require('fs-extra');
-const getDateFromPhoto = require('./GetDateFromPhoto');
-const JIMP = require('jimp');
-const path = require('path');
+const formatDate = require("./FormatDate");
+const fs = require("fs-extra");
+const getDateFromPhoto = require("./GetDateFromPhoto");
+const JIMP = require("jimp");
+const path = require("path");
 
 module.exports = async function (file, widths, outputDir) {
   let newName = await getDateFromPhoto(file);
-  newName = await formatDate(newName) + path.extname(file);
+  newName = (await formatDate(newName)) + path.extname(file);
 
-  widths.map(width => {
+  widths.map((width) => {
     fs.exists(`${outputDir}/w${width}/${newName}`, async function (exists) {
       if (!exists) {
         const image = await JIMP.read(file);
@@ -30,4 +30,4 @@ module.exports = async function (file, widths, outputDir) {
       console.log(`Generated: ${outputDir}/blur/${newName}`);
     }
   });
-}
+};

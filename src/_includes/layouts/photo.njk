@@ -26,9 +26,11 @@ layout: "layouts/base.njk"
 
   <figure>
     <img src="/photos/w960/{{ image_path }}" alt="{{ image.ImageDescription }}">
-      <figcaption>
-        <p>Taken using a {{ image.Make }} {{ image.Model }} ISO: {{ exif.ISO }} <span class="lowercase">ƒ</span>/{{exif.FNumber }}</p>
-      </figcaption>
+    <figcaption>
+      <p>Taken using a {{ image.Make }}
+        {{ image.Model }} ISO: {{ exif.ISO }}
+        <span class="lowercase">ƒ</span>/{{exif.FNumber }}</p>
+    </figcaption>
   </figure>
 
   <h2>Available meta tags</h2>
@@ -51,7 +53,7 @@ layout: "layouts/base.njk"
       <tr>
         <td>exif.{{ name }}</td>
         <td>{{ item }}</td>
-    </tr>
+      </tr>
     {%- endfor %}
 
     {% for name, item in thumbnail %}
@@ -65,12 +67,16 @@ layout: "layouts/base.njk"
   <ul>
     {%- if prevItemIndex >= 0 %}
       {%- set prev = collections.exifPhotos[prevItemIndex] %}
-      <li><a href="{{ prev.url }}">Previous Photo</a></li>
+      <li>
+        <a href="{{ prev.url }}">Previous Photo</a>
+      </li>
     {%- endif %}
 
     {%- if nextItemIndex < collections.exifPhotos.length %}
       {%- set next = collections.exifPhotos[nextItemIndex] %}
-      <li><a href="{{ next.url }}">Next Photo</a></li>
+      <li>
+        <a href="{{ next.url }}">Next Photo</a>
+      </li>
     {%- endif %}
   </ul>
 </main>

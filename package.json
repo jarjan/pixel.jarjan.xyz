@@ -1,7 +1,8 @@
 {
-  "name": "jamstack-photo-website",
+  "name": "pixel.jarjan.xyz",
   "version": "0.0.1",
-  "description": "This is a proof-of concept workflow that extracts EXIF data embeded in photos to generate a static website using Eleventy",
+  "private": true,
+  "description": "Photos taken by Pixel 3 smartphone. #teampixel",
   "scripts": {
     "start": "node node-exif-photos && ELEVENTY_ENV=development eleventy --serve --watch",
     "build": "node node-exif-photos && del dist && ELEVENTY_ENV=production eleventy"

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+      
+      
+      pixel.jarjan.xyz
+    </title>
+    
+    <style>
+      .no-js img.lazy {
+        display: none;
+      }
+
+      html {
+        box-sizing: border-box;
+      }
+
+      *,
+      *:after,
+      *:before {
+        box-sizing: inherit;
+      }
+
+      body {
+        font-family: sans-serif;
+      }
+
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: -1rem;
+        margin-right: -1rem;
+      }
+
+      ul li {
+        width: 50%;
+        padding: 1rem;
+      }
+
+      ul li figure {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+      }
+
+      ul li figure img,
+      ul li figure noscript {
+        object-fit: cover;
+        max-width: 100%;
+        height: 100%;
+      }
+
+      ul li figure figcaption {
+        margin-top: 1rem;
+      }
+
+      ol {
+        padding: 1rem 0;
+        border-top: solid 1px grey;
+        border-bottom: solid 1px gray;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      figure {
+        margin: 0;
+      }
+
+      ol,
+      ul {
+        list-style: none;
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      main {
+        max-width: 960px;
+        margin: 1rem auto;
+      }
+
+      footer {
+        font-size: 0.875rem;
+        text-align: center;
+        margin: 2rem 0;
+      }
+
+      table {
+        width: 100%;
+        text-align: left;
+      }
+
+      table td,
+      table th {
+        padding: 0.5rem;
+        border: solid 1px gray;
+      }
+    </style>
+  </head>
+
+  <body>
+    
+<main>
+  <a href="/">
+    <h1>pixel.jarjan.xyz</h1>
+  </a>
+  <h2>#teampixel</h2>
+
+  
+  
+
+  <h3>14 photos</h3>
+
+  <ul>
+    
+      
+      
+      
+        
+      
+      <li>
+        <a href="/photo/01-12-2019-48544854/">
+          <figure>
+            <noscript>
+              <img alt="" src="/photos/w520/01_12_2019_104854.jpg">
+            </noscript>
+            <img class="lazy" src="/photos/blur/01_12_2019_104854.jpg" alt="" data-src="/photos/w520/01_12_2019_104854.jpg">
+            <figcaption>
+              <time>Photo taken 01.12.19</time>
+            </figcaption>
+          </figure>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      <li>
+        <a href="/photo/30-11-2019-40354035/">
+          <figure>
+            <noscript>
+              <img alt="" src="/photos/w520/30_11_2019_034035.jpg">
+            </noscript>
+            <img class="lazy" src="/photos/blur/30_11_2019_034035.jpg" alt="" data-src="/photos/w520/30_11_2019_034035.jpg">
+            <figcaption>
+              <time>Photo taken 30.11.19</time>
+            </figcaption>
+          </figure>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      <li>
+        <a href="/photo/06-10-2019-51195119/">
+          <figure>
+            <noscript>
+              <img alt="" src="/photos/w520/06_10_2019_015119.jpg">
+            </noscript>
+            <img class="lazy" src="/photos/blur/06_10_2019_015119.jpg" alt="" data-src="/photos/w520/06_10_2019_015119.jpg">
+            <figcaption>
+              <time>Photo taken 06.10.19</time>
+            </figcaption>
+          </figure>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      <li>
+        <a href="/photo/02-10-2019-59385938/">
+          <figure>
+            <noscript>
+              <img alt="" src="/photos/w520/02_10_2019_015938.jpg">
+            </noscript>
+            <img class="lazy" src="/photos/blur/02_10_2019_015938.jpg" alt="" data-src="/photos/w520/02_10_2019_015938.jpg">
+            <figcaption>
+              <time>Photo taken 02.10.19</time>
+            </figcaption>
+          </figure>
+        </a>
+      </li>
+    
+  </ul>
+
+  <nav>
+    <ol>
+      
+        <li>
+          <a href="/1/">Previous</a>
+        </li>
+      
+        <li>
+          <a href="/">1</a>
+        </li>
+        <li>
+          <a href="/1/">2</a>
+        </li>
+        <li>
+          <a href="/2/" aria-current="page">3</a>
+        </li>
+        <li>
+          <a href="/3/">4</a>
+        </li>
+      
+        <li>
+          <a href="/3/">Next</a>
+        </li>
+      
+    </ol>
+  </nav>
+
+  <footer>
+    <a href="https://jarjan.xyz">jarjan.xyz</a>
+  </footer>
+</main>
+  </body>
+  <script>
+    (function () {
+      'use strict';
+      document.documentElement.className = document
+        .documentElement
+        .className
+        .replace('no-js', 'js');
+
+      // Stolen from: https://scotch.io/tutorials/lazy-loading-images-for-performance-using-intersection-observer
+      var images = document.querySelectorAll('img.lazy');
+
+      var options = {
+        // If the image gets within 50px in the Y axis, start the download.
+        root: null, // Page as root
+        rootMargin: '0px',
+        threshold: 0.1
+      };
+
+      var fetchImage = function (url) {
+        return new Promise((resolve, reject) => {
+          var image = new Image();
+          image.src = url;
+          image.onload = resolve;
+          image.onerror = reject;
+        });
+      }
+
+      var loadImage = function (image) {
+        var src = image.dataset.src;
+        fetchImage(src).then(() => {
+          image.src = src;
+        })
+      }
+
+      var handleIntersection = function (entries, observer) {
+        entries.forEach(entry => {
+          if (entry.intersectionRatio > 0) {
+            loadImage(entry.target)
+          }
+        })
+      }
+
+      // The observer for the images on the page
+      var observer = new IntersectionObserver(handleIntersection, options);
+      images.forEach(function (img) {
+        observer.observe(img);
+      })
+    })();
+  </script>
+
+</html>
