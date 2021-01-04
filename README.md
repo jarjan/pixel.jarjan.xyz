@@ -1,6 +1,6 @@
 # pixel.jarjan.xyz
 
-> Photos taken by Pixel 3 smartphone. #teampixel
+> Photos taken by Pixel smartphone. #teampixel
 
 ## What is this?
 
@@ -33,7 +33,7 @@ Each source photo must have an EXIF value for `DateTimeOriginal` - anything else
 1. Install dependencies
 
 ```
-npm install
+yarn
 ```
 
 2. Drop a few photos that meet the [minimal requirements](#Photo-requirements) in `src/_photos`.
@@ -42,7 +42,7 @@ npm install
    This step runs `node-exif-photos` then `eleventy`.
 
 ```
-npm start
+yarn dev
 ```
 
 ### Generate a build

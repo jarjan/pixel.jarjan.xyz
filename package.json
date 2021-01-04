@@ -4,7 +4,7 @@
   "private": true,
   "description": "Photos taken by Pixel smartphone. #teampixel",
   "scripts": {
-    "start": "node node-exif-photos && ELEVENTY_ENV=development eleventy --serve --watch",
+    "dev": "node node-exif-photos && ELEVENTY_ENV=development eleventy --serve --watch",
     "build": "node node-exif-photos && del dist && ELEVENTY_ENV=production eleventy"
   },
   "author": "Chris Collins",
