@@ -67,10 +67,7 @@ module.exports = function (eleventyConfig) {
     dir: {
       input: "./src",
       output: "./docs",
-      includes: "_includes",
     },
-    templateFormats: ["html", "md", "njk", "yml"],
-    htmlTemplateEngine: "njk",
 
     // 1.1 Enable eleventy to pass dirs specified above
     passthroughFileCopy: true,
