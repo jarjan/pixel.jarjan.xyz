@@ -106,3 +106,6 @@ dist
 dist
 
 .DS_Store
+
+src/_exifdata
+src/photos

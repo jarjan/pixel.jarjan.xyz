@@ -66,7 +66,6 @@ module.exports = function (eleventyConfig) {
   return {
     dir: {
       input: "./src",
-      output: "./docs",
     },
 
     // 1.1 Enable eleventy to pass dirs specified above
