@@ -1,74 +1,81 @@
-const { DateTime } = require("luxon");
+const CleanCSS = require("clean-css");
+const { minify } = require("terser");
+const metagen = require("eleventy-plugin-metagen");
+const respimg = require("eleventy-plugin-sharp-respimg");
+const eleventyNavigation = require("@11ty/eleventy-navigation");
 
-module.exports = function (eleventyConfig) {
-  // Folders to copy to build dir (See. 1.1)
-  eleventyConfig.addPassthroughCopy("src/photos");
+module.exports = (eleventyConfig) => {
+  eleventyConfig.addPlugin(metagen);
+  eleventyConfig.addPlugin(respimg);
+  eleventyConfig.addPlugin(eleventyNavigation);
 
-  // https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
-  eleventyConfig.addFilter("htmlDateString", (dateObj) => {
-    return DateTime.fromJSDate(new Date(dateObj), {
-      zone: "utc",
-    }).toFormat("dd/LL/yyyy");
+  eleventyConfig.setTemplateFormats(["md", "njk"]);
+
+  markdownTemplateEngine: "njk";
+
+  // Perform manual passthrough file copy to include directories in the build output _site
+  eleventyConfig.addPassthroughCopy("./src/images");
+  eleventyConfig.addPassthroughCopy("./src/photos");
+  eleventyConfig.addPassthroughCopy("./src/css");
+  eleventyConfig.addPassthroughCopy("./src/js");
+  eleventyConfig.addPassthroughCopy("./src/favicon_data");
+
+  // Create css-clean CSS Minifier filter
+  eleventyConfig.addFilter("cssmin", function (code) {
+    return new CleanCSS({}).minify(code).styles;
   });
 
-  eleventyConfig.addFilter("dateUrl", (dateObj) => {
-    return DateTime.fromJSDate(new Date(dateObj), {
-      zone: "utc",
-    }).toFormat("dd-LL-yyyy-mmssms");
-  });
-
-  eleventyConfig.addFilter("readableDate", (dateObj) => {
-    return DateTime.fromJSDate(new Date(dateObj), {
-      zone: "utc",
-    }).toFormat("dd.MM.yy");
-  });
-
-  eleventyConfig.addCollection("exifPhotos", function (collection) {
-    return collection
-      .getFilteredByGlob("src/_exifdata/*.md")
-      .sort(function (a, b) {
-        return (
-          new Date(b.data.exif.DateTimeOriginal) -
-          new Date(a.data.exif.DateTimeOriginal)
-        );
-      });
-  });
-
-  eleventyConfig.addCollection("tagList", function (collection) {
-    let tagSet = new Set();
-    collection.getAll().forEach(function (item) {
-      if ("tags" in item.data) {
-        let tags = item.data.tags;
-
-        tags = tags.filter(function (item) {
-          switch (item) {
-            // this list should match the `filter` list in tags.njk
-            case "all":
-            case "nav":
-            case "post":
-            case "posts":
-              return false;
-          }
-
-          return true;
-        });
-
-        for (const tag of tags) {
-          tagSet.add(tag);
-        }
+  // Create terser JS Minifier async filter (Nunjucks)
+  eleventyConfig.addNunjucksAsyncFilter(
+    "jsmin",
+    async function (code, callback) {
+      try {
+        const minified = await minify(code);
+        callback(null, minified.code);
+      } catch (err) {
+        console.log(`Terser error: ${err}`);
+        // Fail gracefully
+        callback(null, code);
       }
-    });
+    }
+  );
 
-    // returning an array in addCollection works in Eleventy 0.5.3
-    return [...tagSet];
+  // Configure image in a template paired shortcode
+  eleventyConfig.addPairedShortcode(
+    "image",
+    (srcSet, src, alt, sizes = "(min-width: 400px) 33.3vw, 100vw") => {
+      return `<img srcset="${srcSet}" src="${src}" alt="${alt}" sizes="${sizes}" />`;
+    }
+  );
+
+  // Configure outgoing Pexels anchor elements in a template paried shortcode
+  eleventyConfig.addPairedShortcode(
+    "link",
+    (
+      href,
+      cls = "image-link",
+      rel = "noopener",
+      target = "_blank",
+      btnTxt = "Pexels"
+    ) => {
+      return `<a class="${cls}" href="${href}" rel="${rel}" target="${target}">${btnTxt}</a>`;
+    }
+  );
+
+  // get the current year to be placed in the footer
+  eleventyConfig.addShortcode("getYear", function () {
+    const year = new Date().getFullYear();
+    return `${year}`;
   });
 
   return {
     dir: {
-      input: "./src",
+      input: "src",
+      output: "_site",
+      layouts: "_includes/layouts",
+      includes: "_includes",
     },
-
-    // 1.1 Enable eleventy to pass dirs specified above
+    templateFormats: ["md", "liquid", "njk"],
     passthroughFileCopy: true,
   };
 };

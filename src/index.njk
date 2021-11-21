@@ -1,80 +1,14 @@
 ---
-layout: layouts/base.njk
-pagination:
- data: collections.exifPhotos
- size: 4
- alias: photoList
+title: "#teampixel"
+layout: main.njk
+permalink: "/"
+meta_desc: Photos taken on Google Pixel phones #teampixel
+url: https://pixel.jarjan.xyz
+img: /images/highway-water.jpg
+alt: Terrace outside shop window with green plants and pink tree on night street
+cardType: summary_large_image
 ---
 
-<main class="max-w-7xl mx-auto py-10">
-  <a href="/">
-    <h1 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">pixel.jarjan.xyz</h1>
-  </a>
-  <h2 >#teampixel</h2>
+<h1 class="ft-h1">{{ title }}</h1>
 
-  {# This should be a ul :| #}
-  {% for tag in collections.tagList %}
-    {% set tagUrl %}/tags/{{ tag | slug }}/{% endset %}
-    <a href="{{ tagUrl | url }}" class="no-underline hover:underline font-normal text-gray-700">#{{ tag | slug }}</a>,
-  {% endfor %}
-
-  <div class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10 mt-10">
-    {% for photo in photoList %}
-      {# Try and detect if the photo is portrait, useful for styling #}
-      {% set isPortrait = false %}
-      {% if photo.data.exif.PixelXDimension and photo.data.exif.PixelYDimension %}
-        {% if photo.data.exif.PixelXDimension < photo.data.exif.PixelYDimension %}
-          {% set isPortrait = true %}
-        {% endif %}
-      {% endif %}
-      <a href="{{ photo.url }}">
-        <figure>
-          <noscript>
-            <img alt="{{ photo.data.image.ImageDescription }}" src="/photos/w520/{{ photo.data.image_path }}">
-          </noscript>
-          <img class="lazy" src="/photos/blur/{{ photo.data.image_path }}" alt="{{ photo.data.image.ImageDescription }}" data-src="/photos/w520/{{ photo.data.image_path }}">
-          <figcaption class="text-sm text-gray-700">
-            <time>{{ photo.data.exif.DateTimeOriginal | readableDate }}</time>
-          </figcaption>
-        </figure>
-      </a>
-    {% endfor %}
-  </div>
-
-  <div class="flex sm:items-center sm:justify-between mt-10">
-    <p>{{ collections.exifPhotos.length }} photos</p>
-    <nav class="inline-flex shadow-sm">
-      {% if pagination.href.previous %}
-        <a href="{{ pagination.href.previous }}" class="inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-          <span class="sr-only">Previous</span>
-          <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
-          </svg>
-        </a>
-      {% endif %}
-      {%- for pageEntry in pagination.pages %}
-        <a
-        href="{{ pagination.hrefs[ loop.index0 ] }}"
-        {% if page.url == pagination.hrefs[ loop.index0 ] %}
-        aria-current="page"
-        {% endif %}
-        class="inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
-          {{ loop.index }}
-        </a>
-      </li>
-    {%- endfor %}
-    {% if pagination.href.next %}
-      <a href="{{ pagination.href.next }}" class="inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-        <span class="sr-only">Next</span>
-        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-          <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
-        </svg>
-      </a>
-    {% endif %}
-  </nav>
-</div>
-
-<footer class="mt-5">
-  <a href="https://jarjan.xyz" class="text-blue-500 underline">jarjan.xyz</a>
-</footer>
-</main>
+{% include "feature-gallery.njk" %}
