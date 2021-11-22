@@ -56,7 +56,7 @@ module.exports = (eleventyConfig) => {
       cls = "image-link",
       rel = "noopener",
       target = "_blank",
-      btnTxt = "Pexels"
+      btnTxt = "pixel.jarjan.xyz"
     ) => {
       return `<a class="${cls}" href="${href}" rel="${rel}" target="${target}">${btnTxt}</a>`;
     }
